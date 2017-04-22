@@ -1,0 +1,65 @@
+The following are the steps to install rstudo server on Ubuntu 14.04 LTS.
+
+1) First, R must be installed on the server. This can be done using following commands.
+
+   a) edit the file /etc/apt/sources.list to add your favorite CRAN repository 
+        deb http://cran.univ-paris1.fr/bin/linux/ubuntu trusty/
+      
+   b) add the corresponding GPG keys to your list of keys:
+        gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
+        gpg -a --export E084DAB9 | sudo apt-key add -
+ 
+   c) reload the package list and install R
+         sudo apt-get update
+         sudo apt-get install r-base r-base-dev
+         
+   d) Packages for the CRAN repository are built on a Launchpad PPA called RutteR. It is possible to use the PPA itself, 
+      which includes a few more packages than the CRAN repository. 
+      
+      Installing the PPA is done using:
+         sudo add-apt-repository ppa:marutter/rrutter
+         sudo apt-get update
+      and packages can simply be installed using
+         sudo apt-get install r-cran-reshape2
+         
+      Check R installation by typing "R" at command prompt. Output looks like as follows.
+      
+      ram@ram-Vostro-3546:~$ R
+
+      R version 3.4.0 (2017-04-21) -- "You Stupid Darkness"
+      Copyright (C) 2017 The R Foundation for Statistical Computing
+      Platform: x86_64-pc-linux-gnu (64-bit)
+
+      R is free software and comes with ABSOLUTELY NO WARRANTY.
+      You are welcome to redistribute it under certain conditions.
+      Type 'license()' or 'licence()' for distribution details.
+
+      Natural language support but running in an English locale
+
+      R is a collaborative project with many contributors.
+      Type 'contributors()' for more information and
+     'citation()' on how to cite R or R packages in publications.
+
+      Type 'demo()' for some demos, 'help()' for on-line help, or
+     'help.start()' for an HTML browser interface to help.
+      Type 'q()' to quit R.
+
+      > 
+
+2) Then, install rstudio server using the below commands.
+   
+   The installation is performed by first installing two additional packages (the first one to ease the installation of deb packages and the second one to manage security options in RStudio Server:
+
+    sudo apt-get install gdebi-core libapparmor1
+
+    Then, the package is downloaded and installed using:
+
+    wget https://download2.rstudio.org/rstudio-server-1.0.143-amd64.deb
+    sudo gdebi rstudio-server-1.0.143-amd64.deb
+
+At this step, RStudio Server is maybe accessible at http://127.0.0.1:8787.
+
+Sources : 
+https://www.rstudio.com/products/rstudio/download-server/
+https://www.r-bloggers.com/installing-rstudio-server-on-ubuntu-server/
+http://tuxette.nathalievilla.org/?p=1380&lang=en
